@@ -1,4 +1,4 @@
-from,to
+apt,pacman
 install $$,-S $$
 remove $,-Rs $
 autoremove $,-R $
