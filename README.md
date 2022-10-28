@@ -11,7 +11,7 @@ The first line is the csv header but also is the command excutor.
 We use following syntax to present matching way:
 
 | Symbol | Meaning | Syntax |
-| :-- | :-- | | :-- |
+| :-- | :-- | :-- |
 | `,` | delimiter | `apt,pacman` |
 | `;` | command separator | `-Syu;-S` |
 | `$` | match 1 word | `upgrade $` |
