@@ -1,0 +1,8 @@
+from,to
+install $$,-S $$
+remove $,-Rs $
+autoremove $,-R $
+upgrade,-Syu
+upgrade $$,-Syu;-S $$
+search $$,-Ss
+list,-Q
