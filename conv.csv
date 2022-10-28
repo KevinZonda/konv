@@ -6,3 +6,6 @@ upgrade,-Syu
 upgrade $$,-Syu;-S $$
 search $$,-Ss
 list,-Q
+clean,-Sc
+show,-Qi
+autoremove,-Qdtq | pacman -Rs -
