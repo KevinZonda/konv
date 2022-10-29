@@ -30,11 +30,13 @@ func (t *CheckTree) AddToSub(keys []string, data *string) {
 	maxIndex := 0
 	for i, key := range keys {
 		now, ok := t.Children[key]
-		if ok {
-			curr = now
-			maxIndex = i
-			continue
+		if !ok {
+			break
 		}
+		curr = now
+		maxIndex = i
+		continue
+
 	}
 	keysN := keys[maxIndex+1:]
 	if len(keysN) < 1 {

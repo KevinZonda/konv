@@ -29,7 +29,7 @@ func loadFromToStyleCsv(path string) (from, to string, result map[string]string,
 	}
 	from, to = headers[0], headers[1]
 
-	result = csv.ParseLines(lines[1:], "")
+	result = csv.ParseLines(lines[1:], ",")
 	return
 }
 
