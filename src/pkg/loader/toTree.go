@@ -4,19 +4,17 @@ import (
 	"strings"
 
 	"github.com/KevinZonda/apt-pac/pkg/decision"
+	"github.com/KevinZonda/apt-pac/pkg/utils"
 )
 
-func parseCommandToTree(s string) *decision.CheckTree {
+func appendCommandToTree(s string, root *decision.CheckTree, data *string) {
 	ss := strings.Split(s, " ")
-	root := &decision.CheckTree{}
-	curr := root
-	for i, c := range ss {
-		if i == 0 {
-			root.Key = c
-			continue
+	var nonEmpty []string
+	for _, c := range ss {
+		t := utils.Trim(c)
+		if t != "" {
+			nonEmpty = append(nonEmpty, c)
 		}
-		curr.AddKey(c)
-		curr = root.Children[c]
 	}
-	return root
+	root.AddToSub(nonEmpty, data)
 }

@@ -6,6 +6,7 @@ import (
 
 type CheckTree struct {
 	Key      string
+	Data     *string
 	Children map[string]*CheckTree
 }
 
@@ -24,7 +25,7 @@ func (t *CheckTree) Add(v *CheckTree) error {
 	return nil
 }
 
-func (t *CheckTree) AddToSub(keys []string) {
+func (t *CheckTree) AddToSub(keys []string, data *string) {
 	curr := t
 	maxIndex := 0
 	for i, key := range keys {
@@ -44,6 +45,7 @@ func (t *CheckTree) AddToSub(keys []string) {
 		_ = cons.AddKey(key)
 		cons = curr.Children[key]
 	}
+	cons.Data = data
 }
 
 func (t *CheckTree) Get(keys []string) *CheckTree {
