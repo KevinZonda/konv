@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	_, to, dec, err := loader.Load("/home/kevin/Desktop/apt-pac/conv.csv")
+	_, to, dec, err := loader.Load("/etc/apt-pac/rule.csv")
 
 	if err != nil {
 		fmt.Println("load conv law failed!")
