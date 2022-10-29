@@ -7,14 +7,13 @@ import (
 	"github.com/KevinZonda/apt-pac/pkg/utils"
 )
 
-func appendCommandToTree(s string, root *decision.CheckTree, data *string) {
+func appendCommandToTree(s string, root *decision.CheckTree, data string) {
 	ss := strings.Split(s, " ")
 	var nonEmpty []string
+	ss = utils.TrimAll(ss)
 	for _, c := range ss {
-		t := utils.Trim(c)
-		if t != "" {
-			nonEmpty = append(nonEmpty, c)
-		}
+		nonEmpty = append(nonEmpty, c)
 	}
-	root.AddToSub(nonEmpty, data)
+	_d := data
+	root.AddToSub(nonEmpty, &_d)
 }

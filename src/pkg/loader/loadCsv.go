@@ -38,7 +38,7 @@ func parseCsvContentToTree(head string, result map[string]string) *decision.Chec
 		Key: head,
 	}
 	for k, v := range result {
-		appendCommandToTree(k, f, &v)
+		appendCommandToTree(k, f, v)
 	}
 	return f
 }
