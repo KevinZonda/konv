@@ -12,7 +12,6 @@ import (
 func main() {
 	_, to, dec, err := loader.Load("/home/kevin/Desktop/apt-pac/conv.csv")
 
-	// fmt.Printf("from: %s\nto: %s\ndec: %+v\nerr: %v\n", from, to, dec, err)
 	if err != nil {
 		fmt.Println("load conv law failed!")
 		return
@@ -38,9 +37,7 @@ func main() {
 	}
 
 	for _, arg := range argses {
-		cmd := exec.Command(to)
-
-		cmd.Args = arg
+		cmd := exec.Command(to, arg...)
 
 		cmd.Stderr = os.Stderr
 		cmd.Stdout = os.Stdout
