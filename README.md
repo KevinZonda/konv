@@ -16,4 +16,8 @@ We use following syntax to present matching way:
 | `;` | command separator | `-Syu;-S` |
 | `$` | match 1 word | `upgrade $` |
 | `$$` | match many words, i.e. `[word]` | `update $$` |
-| `@` | if a command starts with it means the command will not use the excutor which is mentioned at csv header | `update;@ls`|
+
+## Some Tool
+
+- `apt y xxx`: it will skip confirm of pacman command
+  check, but will not say yes to pacman
