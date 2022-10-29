@@ -24,8 +24,8 @@ func main() {
 	default:
 		if osArgs[0] == "y" {
 			needConfirm = false
+			osArgs = osArgs[1:]
 		}
-		osArgs = osArgs[1:]
 	}
 
 	pattern, vars, ok := loader.Conv(dec, utils.TrimAll(osArgs))
