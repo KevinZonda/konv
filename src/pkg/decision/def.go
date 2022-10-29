@@ -14,6 +14,10 @@ func (t *CheckTree) AddKey(key string) error {
 	return t.Add(&CheckTree{Key: key})
 }
 
+func (t *CheckTree) AddKeyAndValue(key, value string) error {
+	return t.Add(&CheckTree{Key: key, Data: &value})
+}
+
 func (t *CheckTree) Add(v *CheckTree) error {
 	if t == nil {
 		return errors.New("empty tree")
@@ -25,24 +29,35 @@ func (t *CheckTree) Add(v *CheckTree) error {
 	return nil
 }
 
-func (t *CheckTree) AddToSub(keys []string, data *string) {
+func (t *CheckTree) AddToSub(keys []string, data string) {
+	if len(keys) == 1 {
+		n := t.GetNode(keys[0])
+		if n == nil {
+			_ = t.AddKeyAndValue(keys[0], data)
+			return
+		}
+		n.Data = &data
+		return
+	}
 	curr := t
 	index := 0
 	for i, key := range keys {
 		g := curr.GetNode(key)
+		// fmt.Printf("GET: %s -> %s -> %v\n", curr.Key, key, g == nil)
+		index = i
 		if g != nil {
 			curr = g
 			continue
 		}
-		index = i
 		break
 	}
 	toAdd := keys[index:]
 	for _, key := range toAdd {
+		// fmt.Printf("ADD: %s -> %s\n", curr.Key, key)
 		_ = curr.AddKey(key)
 		curr = curr.GetNode(key)
 	}
-	curr.Data = data
+	curr.Data = &data
 }
 
 func (t *CheckTree) Get(keys []string) *CheckTree {
