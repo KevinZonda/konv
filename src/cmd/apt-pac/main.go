@@ -17,7 +17,7 @@ func main() {
 		return
 	}
 
-	pattern, vars, ok := loader.Conv(dec, os.Args[1:])
+	pattern, vars, ok := loader.Conv(dec, utils.TrimAll(os.Args[1:]))
 	if !ok {
 		fmt.Println("Parse failed. Please ensure that your command is correct!")
 		return
