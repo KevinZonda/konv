@@ -79,3 +79,19 @@ func (r *CheckTree) GetNode(key string) *CheckTree {
 	}
 	return c
 }
+
+func (r *CheckTree) Next(key string) *CheckTree {
+	c, ok := r.Children[key]
+	if ok {
+		return c
+	}
+	if r.Key == "$$" {
+		return r
+	}
+	c, ok = r.Children["$$"]
+	if ok {
+		return c
+	}
+	c, ok = r.Children["$"]
+	return c
+}

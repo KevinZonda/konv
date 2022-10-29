@@ -9,3 +9,4 @@ list,-Q
 clean,-Sc
 show,-Qi
 autoremove,-Qdtq | pacman -Rs -
+update,-Syy

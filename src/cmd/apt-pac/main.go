@@ -12,7 +12,17 @@ func main() {
 
 	from, to, dec, err := loader.Load("/home/kevin/Desktop/apt-pac/conv.csv")
 
-	fmt.Printf("from: %s\nto: %s\ndec: %+v\nerr: %v", from, to, dec, err)
+	fmt.Printf("from: %s\nto: %s\ndec: %+v\nerr: %v\n", from, to, dec, err)
+
+	args := []string{"upgrade"}
+	curr := dec
+	for _, arg := range args {
+		if curr == nil {
+			break
+		}
+		curr = curr.Next(arg)
+	}
+	fmt.Printf("%s", *curr.Data)
 	return
 
 	cmd := exec.Command("pacman")
