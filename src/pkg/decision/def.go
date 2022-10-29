@@ -27,27 +27,22 @@ func (t *CheckTree) Add(v *CheckTree) error {
 
 func (t *CheckTree) AddToSub(keys []string, data *string) {
 	curr := t
-	maxIndex := 0
+	index := 0
 	for i, key := range keys {
-		now, ok := t.Children[key]
-		if !ok {
-			break
+		g := curr.GetNode(key)
+		if g != nil {
+			curr = g
+			continue
 		}
-		curr = now
-		maxIndex = i
-		continue
-
+		index = i
+		break
 	}
-	keysN := keys[maxIndex+1:]
-	if len(keysN) < 1 {
-		return
+	toAdd := keys[index:]
+	for _, key := range toAdd {
+		_ = curr.AddKey(key)
+		curr = curr.GetNode(key)
 	}
-	cons := curr
-	for _, key := range keysN {
-		_ = cons.AddKey(key)
-		cons = curr.Children[key]
-	}
-	cons.Data = data
+	curr.Data = data
 }
 
 func (t *CheckTree) Get(keys []string) *CheckTree {
@@ -72,4 +67,15 @@ func (t *CheckTree) get(keys []string, isfirst bool) *CheckTree {
 		return nil
 	}
 	return child.get(keys[1:], false)
+}
+
+func (r *CheckTree) GetNode(key string) *CheckTree {
+	if r == nil {
+		return nil
+	}
+	c, ok := r.Children[key]
+	if !ok {
+		return nil
+	}
+	return c
 }
