@@ -20,21 +20,24 @@ func main() {
 
 	pattern, vars, ok := loader.Conv(dec, os.Args[1:])
 	if !ok {
-		fmt.Println("conv law failed!")
+		fmt.Println("Parse failed. Please ensure that your command is correct!")
 		return
 	}
 	argses := loader.PatternToArgs(pattern, vars)
-	scanner := bufio.NewReader(os.Stdin)
-	for _, arg := range argses {
-		fmt.Printf("%+v\n", arg)
-		fmt.Print("Continue [y/n]?")
-		ans, _ := scanner.ReadString('\n')
-		if utils.Trim(ans) != "y" {
-			fmt.Println("Abort")
-			return
-		}
-		continue
 
+	scanner := bufio.NewReader(os.Stdin)
+	fmt.Println("Please ensure following commands are correct!")
+	for i, arg := range argses {
+		fmt.Printf("%d: %s %+v\n", i, to, arg)
+	}
+	fmt.Print("Continue [y/n]?")
+	ans, _ := scanner.ReadString('\n')
+	if utils.Trim(ans) != "y" {
+		fmt.Println("Abort")
+		return
+	}
+
+	for _, arg := range argses {
 		cmd := exec.Command(to)
 
 		cmd.Args = arg
