@@ -19,7 +19,7 @@ func main() {
 
 	pattern, vars, ok := loader.Conv(dec, utils.TrimAll(os.Args[1:]))
 	if !ok {
-		fmt.Println("Parse failed. Please ensure that your command is correct!")
+		fmt.Println("Parse failed. Please confirm that your command is correct!")
 		return
 	}
 	argses := loader.PatternToArgs(pattern, vars)
