@@ -41,7 +41,9 @@ func main() {
 
 		cmd.Stderr = os.Stderr
 		cmd.Stdout = os.Stdout
+		cmd.Stdin = os.Stdin
 
 		_ = cmd.Start()
+		_ = cmd.Wait()
 	}
 }
