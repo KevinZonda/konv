@@ -1,6 +1,10 @@
 package csv
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/KevinZonda/apt-pac/pkg/utils"
+)
 
 func ParseLines(lines []string, sep string) map[string]string {
 	pairs := make(map[string]string)
@@ -8,7 +12,7 @@ func ParseLines(lines []string, sep string) map[string]string {
 		return pairs
 	}
 	for _, line := range lines {
-		trimed := trim(line)
+		trimed := utils.Trim(line)
 		if line == "" {
 			continue
 		}
@@ -16,15 +20,11 @@ func ParseLines(lines []string, sep string) map[string]string {
 		if len(kvp) != 2 {
 			continue
 		}
-		pairs[trim(kvp[0])] = trim(kvp[1])
+		pairs[utils.Trim(kvp[0])] = utils.Trim(kvp[1])
 	}
 	return pairs
 }
 
 func Parse(c string, sep string) map[string]string {
 	return ParseLines(strings.Split(c, "\n"), sep)
-}
-
-func trim(s string) string {
-	return strings.TrimSpace(s)
 }

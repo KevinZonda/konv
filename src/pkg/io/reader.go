@@ -1,6 +1,9 @@
 package io
 
-import "os"
+import (
+	"os"
+	"strings"
+)
 
 func ReadAllText(path string) (dat string, err error) {
 	var datB []byte
@@ -9,5 +12,15 @@ func ReadAllText(path string) (dat string, err error) {
 		return
 	}
 	dat = string(datB)
+	return
+}
+
+func ReadAllLines(path string) (lines []string, err error) {
+	var text string
+	text, err = ReadAllText(path)
+	if err != nil {
+		return
+	}
+	lines = strings.Split(text, "\n")
 	return
 }
