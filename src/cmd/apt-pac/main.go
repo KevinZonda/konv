@@ -20,7 +20,7 @@ func main() {
 		if curr == nil {
 			break
 		}
-		curr = curr.Next(arg)
+		curr, _ = curr.Next(arg)
 	}
 	fmt.Printf("%s", *curr.Data)
 	return

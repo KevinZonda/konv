@@ -80,18 +80,18 @@ func (r *CheckTree) GetNode(key string) *CheckTree {
 	return c
 }
 
-func (r *CheckTree) Next(key string) *CheckTree {
+func (r *CheckTree) Next(key string) (next *CheckTree, isMatchGeneric bool) {
 	c, ok := r.Children[key]
 	if ok {
-		return c
+		return c, false
 	}
 	if r.Key == "$$" {
-		return r
+		return r, true
 	}
 	c, ok = r.Children["$$"]
 	if ok {
-		return c
+		return c, true
 	}
 	c, ok = r.Children["$"]
-	return c
+	return c, true
 }
