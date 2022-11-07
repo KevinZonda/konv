@@ -31,6 +31,8 @@ func main() {
 	cfg := param.Parse(osArgs[0])
 	if cfg.Ok {
 		osArgs = osArgs[1:]
+	} else {
+		_, cfg = param.ParseFromFile(path.GetConversionCfgPath(arg1))
 	}
 
 	pattern, vars, ok := loader.Conv(dec, utils.TrimAll(osArgs))

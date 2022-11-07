@@ -18,6 +18,6 @@ func GetConversionPath(target string) string {
 	return path.Join(getBase(), target+".csv")
 }
 
-func GetConversionCfg(target string) string {
+func GetConversionCfgPath(target string) string {
 	return path.Join(getBase(), target+".cfg")
 }

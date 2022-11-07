@@ -1,6 +1,8 @@
 package param
 
 import (
+	"github.com/KevinZonda/konv/pkg/cfg"
+	"github.com/KevinZonda/konv/pkg/io"
 	"github.com/KevinZonda/konv/pkg/utils"
 	"strings"
 )
@@ -15,6 +17,20 @@ func dft() Mod {
 		Ok:          false,
 		SkipConfirm: false,
 	}
+}
+
+func ParseFromFile(path string) (isOk bool, mod Mod) {
+	mod = dft()
+	s, err := io.ReadAllLines(path)
+	if err != nil {
+		return false, mod
+	}
+	m := cfg.ParseLines(s)
+	param, ok := m["param"]
+	if !ok {
+		return false, mod
+	}
+	return true, Parse(param)
 }
 
 func Parse(s string) Mod {
