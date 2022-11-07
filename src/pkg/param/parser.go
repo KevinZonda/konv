@@ -22,9 +22,16 @@ func Parse(s string) Mod {
 	if !strings.HasPrefix(s, ":") {
 		return m
 	}
-	s = s[1:]
-	if s == "y" {
-		m.SkipConfirm = true
+	ss := utils.TrimAll(strings.Split(s, ":"))
+	for _, p := range ss {
+		switch p {
+		case "y":
+			m.SkipConfirm = true
+			break
+		case "c":
+			m.SkipConfirm = false
+			break
+		}
 	}
 	return m
 }

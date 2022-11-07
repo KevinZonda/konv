@@ -21,17 +21,14 @@ func main() {
 
 	osArgs := os.Args[1:]
 
-	var cfg param.Mod
-
-	switch len(osArgs) {
-	case 0:
+	if len(osArgs) == 0 {
 		fmt.Println("konv")
 		return
-	default:
-		cfg = param.Parse(osArgs[0])
-		if cfg.Ok {
-			osArgs = osArgs[1:]
-		}
+	}
+
+	cfg := param.Parse(osArgs[0])
+	if cfg.Ok {
+		osArgs = osArgs[1:]
 	}
 
 	pattern, vars, ok := loader.Conv(dec, utils.TrimAll(osArgs))
