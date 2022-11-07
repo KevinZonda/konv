@@ -38,13 +38,18 @@ func PatternToArgs(pattern string, vars []string) [][]string {
 		for _, arg := range args {
 			switch arg {
 			case "$":
-				if len(vars) != 1 {
+				if len(vars) == 0 {
 					panic("wrong len")
 				}
+				finalArgs = append(finalArgs, vars[0])
+				vars = vars[1:]
+				break
 			case "$$":
 				finalArgs = append(finalArgs, vars...)
+				break
 			default:
 				finalArgs = append(finalArgs, arg)
+				break
 			}
 		}
 		rst = append(rst, finalArgs)
