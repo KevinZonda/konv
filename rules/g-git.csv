@@ -1,0 +1,13 @@
+g,git
+p,push
+cm $,commit -m $
+c $$,commit $$
+cl $$,clone $$
+r $$,reset $$
+hr $$,reset --hard $$
+co $$,checkout $$
+pl,pull
+a $$,add $$
+aa,add .
+acp $$,add .;commit $$;push
+fp,push --force
