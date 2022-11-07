@@ -25,7 +25,7 @@ func Parse(s string) Mod {
 	ss := utils.TrimAll(strings.Split(s, ":"))
 	for _, p := range ss {
 		switch p {
-		case "y":
+		case "y", "sc":
 			m.SkipConfirm = true
 			break
 		case "c":

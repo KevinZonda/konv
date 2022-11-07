@@ -26,7 +26,23 @@ TODO:
 | `$var$` | match var          |
 | `\$`    | keep original word |
 
-## Some Tool
+## Konv Parameter
 
-- `apt :y xxx`: it will skip confirm of pacman command
-  check, but will not say yes to pacman
+`konv` has a built-in parameter which is between `arg[0]` and `arg[1]`.
+
+E.g.
+
+```bash
+> apt :y upgrade
+#  +  ++ ++++++++
+#  |   |    +------- Arguments
+#  |   +----- Konv Parameter
+#  Konv
+```
+
+In most case, konv parameter can be ignored
+
+| Parameter     | Meaning        |
+|:--------------|:---------------|
+| `:y` or `:sc` | ignore confirm |
+| `:c`          | show confirm   |
