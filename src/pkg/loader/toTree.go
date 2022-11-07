@@ -3,8 +3,8 @@ package loader
 import (
 	"strings"
 
-	"github.com/KevinZonda/apt-pac/pkg/decision"
-	"github.com/KevinZonda/apt-pac/pkg/utils"
+	"github.com/KevinZonda/konv/pkg/decision"
+	"github.com/KevinZonda/konv/pkg/utils"
 )
 
 func appendCommandToTree(s string, root *decision.CheckTree, data string) {

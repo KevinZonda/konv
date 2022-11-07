@@ -1,8 +1,8 @@
 package loader
 
 import (
-	"github.com/KevinZonda/apt-pac/pkg/decision"
-	"github.com/KevinZonda/apt-pac/pkg/utils"
+	"github.com/KevinZonda/konv/pkg/decision"
+	"github.com/KevinZonda/konv/pkg/utils"
 	"strings"
 )
 

@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/KevinZonda/apt-pac/pkg/console"
-	"github.com/KevinZonda/apt-pac/pkg/loader"
-	"github.com/KevinZonda/apt-pac/pkg/param"
-	"github.com/KevinZonda/apt-pac/pkg/process"
-	"github.com/KevinZonda/apt-pac/pkg/utils"
+	"github.com/KevinZonda/konv/pkg/console"
+	"github.com/KevinZonda/konv/pkg/loader"
+	"github.com/KevinZonda/konv/pkg/param"
+	"github.com/KevinZonda/konv/pkg/process"
+	"github.com/KevinZonda/konv/pkg/utils"
 	"os"
 )
 

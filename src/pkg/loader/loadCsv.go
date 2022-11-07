@@ -4,10 +4,10 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/KevinZonda/apt-pac/pkg/csv"
-	"github.com/KevinZonda/apt-pac/pkg/decision"
-	"github.com/KevinZonda/apt-pac/pkg/io"
-	"github.com/KevinZonda/apt-pac/pkg/utils"
+	"github.com/KevinZonda/konv/pkg/csv"
+	"github.com/KevinZonda/konv/pkg/decision"
+	"github.com/KevinZonda/konv/pkg/io"
+	"github.com/KevinZonda/konv/pkg/utils"
 )
 
 func loadFromToStyleCsv(path string) (from, to string, result map[string]string, err error) {

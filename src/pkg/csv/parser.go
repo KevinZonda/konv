@@ -3,7 +3,7 @@ package csv
 import (
 	"strings"
 
-	"github.com/KevinZonda/apt-pac/pkg/utils"
+	"github.com/KevinZonda/konv/pkg/utils"
 )
 
 func ParseLines(lines []string, sep string) map[string]string {

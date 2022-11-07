@@ -1,7 +1,7 @@
 package param
 
 import (
-	"github.com/KevinZonda/apt-pac/pkg/utils"
+	"github.com/KevinZonda/konv/pkg/utils"
 	"strings"
 )
 

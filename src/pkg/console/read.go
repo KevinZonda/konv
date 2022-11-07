@@ -2,7 +2,7 @@ package console
 
 import (
 	"bufio"
-	"github.com/KevinZonda/apt-pac/pkg/utils"
+	"github.com/KevinZonda/konv/pkg/utils"
 	"os"
 )
 

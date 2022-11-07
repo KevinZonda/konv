@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/KevinZonda/apt-pac/pkg/process"
+	"github.com/KevinZonda/konv/pkg/process"
 	"strings"
 )
 

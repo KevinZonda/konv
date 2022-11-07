@@ -1,3 +1,3 @@
-module github.com/KevinZonda/apt-pac
+module github.com/KevinZonda/konv
 
 go 1.19
