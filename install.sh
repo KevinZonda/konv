@@ -12,9 +12,9 @@ cd src
 bash build.sh
 
 # move konv into /usr/bin/
-cp ./out/konv /usr/bin/konv
+cp ./out/konv ln -s /usr/local/bin/konv
 
 # set permission
-chmod +x /usr/bin/konv
+chmod +x /usr/local/bin/konv
 
 echo 'done.'

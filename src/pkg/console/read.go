@@ -9,5 +9,5 @@ import (
 func ReadYes() bool {
 	scanner := bufio.NewReader(os.Stdin)
 	ans, _ := scanner.ReadString('\n')
-	return utils.Trim(ans) != "y"
+	return utils.Trim(ans) == "y"
 }

@@ -49,6 +49,7 @@ func Parse(s string) Mod {
 			break
 		}
 	}
+	m.Ok = true
 	return m
 }
 

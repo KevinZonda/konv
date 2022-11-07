@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 if_empty_exit () {
   if [ -z "$1" ]
@@ -29,8 +29,9 @@ if_empty_exit "$to"
 echo "To: $to"
 echo "So we are going to copy ./$from-$to.csv to /etc/konv/$from.csv"
 ask_yes_or_exit
+mkdir -p /etc/konv
 cp "./$from-$to.csv" "/etc/konv/$from.csv"
 
 echo "Make a link so that you can use the konv?"
 ask_yes_or_exit
-ln -s "/usr/bin/konv" "/usr/bin/$from"
+ln -s "/usr/local/bin/konv" "/usr/local/bin/$from"

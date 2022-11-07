@@ -23,8 +23,8 @@ func main() {
 	osArgs := os.Args[1:]
 
 	if len(osArgs) == 0 {
-		fmt.Println(arg1)
-		fmt.Println("powered by konv")
+		fmt.Print(arg1)
+		fmt.Println(" - powered by konv")
 		return
 	}
 
