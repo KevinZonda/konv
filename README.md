@@ -19,5 +19,5 @@ We use following syntax to present matching way:
 
 ## Some Tool
 
-- `apt y xxx`: it will skip confirm of pacman command
+- `apt :y xxx`: it will skip confirm of pacman command
   check, but will not say yes to pacman
