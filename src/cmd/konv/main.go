@@ -55,5 +55,12 @@ func main() {
 		}
 	}
 
-	process.Runs(runs)
+	process.Runs(runs, func(r process.Runable, err error) bool {
+		fmt.Printf(
+			"run failed:\n"+
+				"cmd: %s %+v\n"+
+				"err: %+v\n", r.Name, r.Args, err)
+		fmt.Print("Continue [y/n?")
+		return console.ReadYes()
+	})
 }

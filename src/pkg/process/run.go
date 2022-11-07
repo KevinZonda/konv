@@ -1,8 +1,6 @@
 package process
 
 import (
-	"fmt"
-	"github.com/KevinZonda/konv/pkg/utils"
 	"os"
 	"os/exec"
 )
@@ -12,11 +10,11 @@ type Runable struct {
 	Args []string
 }
 
-func (r Runable) run() {
-	RunAndWait(r.Name, r.Args...)
+func (r Runable) run() error {
+	return RunAndWait(r.Name, r.Args...)
 }
 
-func RunAndWait(name string, args ...string) {
+func RunAndWait(name string, args ...string) error {
 	cmd := exec.Command(name, args...)
 
 	cmd.Stderr = os.Stderr
@@ -24,16 +22,19 @@ func RunAndWait(name string, args ...string) {
 	cmd.Stdin = os.Stdin
 
 	err := cmd.Start()
-	utils.PanicIfNotNil(err,
-		fmt.Sprintf(
-			"run failed:\n"+
-				"cmd: %s %+v\n"+
-				"err: %+v\n", name, args, err))
-	_ = cmd.Wait()
+	if err != nil {
+		return err
+	}
+	return cmd.Wait()
 }
 
-func Runs(rs []Runable) {
+func Runs(rs []Runable, ifErr func(Runable, error) bool) {
 	for _, r := range rs {
-		r.run()
+		err := r.run()
+		if err != nil && ifErr != nil {
+			if ifErr(r, err) {
+				break
+			}
+		}
 	}
 }
