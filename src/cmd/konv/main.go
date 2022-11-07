@@ -5,6 +5,7 @@ import (
 	"github.com/KevinZonda/konv/pkg/console"
 	"github.com/KevinZonda/konv/pkg/loader"
 	"github.com/KevinZonda/konv/pkg/param"
+	"github.com/KevinZonda/konv/pkg/path"
 	"github.com/KevinZonda/konv/pkg/process"
 	"github.com/KevinZonda/konv/pkg/utils"
 	"os"
@@ -16,13 +17,14 @@ func main() {
 		panic("Cannot found target rule")
 	}
 
-	_, to, dec, err := loader.Load("/etc/konv/" + arg1 + ".csv")
+	_, to, dec, err := loader.Load(path.GetConversionPath(arg1))
 	utils.PanicIfNotNil(err, "load conv law failed!")
 
 	osArgs := os.Args[1:]
 
 	if len(osArgs) == 0 {
-		fmt.Println("konv")
+		fmt.Println(arg1)
+		fmt.Println("powered by konv")
 		return
 	}
 
