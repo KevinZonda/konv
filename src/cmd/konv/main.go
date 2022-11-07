@@ -1,36 +1,17 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
+	"github.com/KevinZonda/apt-pac/pkg/console"
 	"github.com/KevinZonda/apt-pac/pkg/loader"
+	"github.com/KevinZonda/apt-pac/pkg/param"
 	"github.com/KevinZonda/apt-pac/pkg/utils"
 	"os"
 	"os/exec"
-	"strings"
 )
 
-func cleanArg(s string) string {
-	ss := strings.Split(s, "/")
-	s = ss[len(ss)-1]
-	sb := strings.Builder{}
-	for _, c := range s {
-		if !isLetter(c) {
-			sb.Reset()
-			continue
-		}
-		sb.WriteRune(c)
-	}
-
-	return sb.String()
-}
-
-func isLetter(c rune) bool {
-	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-}
-
 func main() {
-	arg1 := utils.Trim(cleanArg(os.Args[0]))
+	arg1 := utils.Trim(param.CleanArg((os.Args[0])))
 	if arg1 == "" {
 		panic("Cannot found target rule")
 	}
@@ -40,15 +21,15 @@ func main() {
 
 	osArgs := os.Args[1:]
 
-	needConfirm := true
+	var cfg param.Mod
 
 	switch len(osArgs) {
 	case 0:
 		fmt.Println("konv")
 		return
 	default:
-		if osArgs[0] == "y" {
-			needConfirm = false
+		cfg = param.Parse(osArgs[0])
+		if cfg.Ok {
 			osArgs = osArgs[1:]
 		}
 	}
@@ -59,15 +40,14 @@ func main() {
 	}
 	argses := loader.PatternToArgs(pattern, vars)
 
-	if needConfirm {
-		scanner := bufio.NewReader(os.Stdin)
+	if !cfg.SkipConfirm {
 		fmt.Println("Please ensure following commands are correct!")
 		for i, arg := range argses {
 			fmt.Printf("%d: %s %+v\n", i, to, arg)
 		}
 		fmt.Print("Continue [y/n]?")
-		ans, _ := scanner.ReadString('\n')
-		if utils.Trim(ans) != "y" {
+		isOk := console.ReadYes()
+		if !isOk {
 			fmt.Println("Abort")
 			return
 		}
