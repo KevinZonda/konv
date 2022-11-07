@@ -4,20 +4,17 @@
 # Please run in sudo mod
 
 # setup folder
-mkdir /etc/apt-pac
-chmod +r /etc/apt-pac
-
-# copy rules file
-cp ./conv.csv /etc/apt-pac/rule.csv
+mkdir /etc/konv
+chmod +r /etc/konv
 
 # compile konv
 cd src
 bash build.sh
 
 # move konv into /usr/bin/
-cp ./out/apt /usr/bin/apt
+cp ./out/konv /usr/bin/konv
 
 # set permission
-chmod +x /usr/bin/apt
+chmod +x /usr/bin/konv
 
 echo 'done.'
