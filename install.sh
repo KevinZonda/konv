@@ -1,7 +1,6 @@
 #!/bin/bash
 # Copyright (C) 2022 KevinZonda
-# This file is to install apt-pac, an apt
-# syntax-like wraper for pacman
+# This file is to install konv, a generalised wrapper
 # Please run in sudo mod
 
 # setup folder
@@ -11,11 +10,11 @@ chmod +r /etc/apt-pac
 # copy rules file
 cp ./conv.csv /etc/apt-pac/rule.csv
 
-# compile apt-pac
+# compile konv
 cd src
 bash build.sh
 
-# move apt-pac into /usr/bin/
+# move konv into /usr/bin/
 cp ./out/apt /usr/bin/apt
 
 # set permission

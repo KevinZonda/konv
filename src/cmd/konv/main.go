@@ -7,10 +7,35 @@ import (
 	"github.com/KevinZonda/apt-pac/pkg/utils"
 	"os"
 	"os/exec"
+	"strings"
 )
 
+func cleanArg(s string) string {
+	ss := strings.Split(s, "/")
+	s = ss[len(ss)-1]
+	sb := strings.Builder{}
+	for _, c := range s {
+		if !isLetter(c) {
+			sb.Reset()
+			continue
+		}
+		sb.WriteRune(c)
+	}
+
+	return sb.String()
+}
+
+func isLetter(c rune) bool {
+	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+}
+
 func main() {
-	_, to, dec, err := loader.Load("/etc/apt-pac/rules.csv")
+	arg1 := utils.Trim(cleanArg(os.Args[0]))
+	if arg1 == "" {
+		panic("Cannot found target rule")
+	}
+
+	_, to, dec, err := loader.Load("/etc/konv/" + arg1 + ".csv")
 	utils.PanicIfNotNil(err, "load conv law failed!")
 
 	osArgs := os.Args[1:]
@@ -19,7 +44,7 @@ func main() {
 
 	switch len(osArgs) {
 	case 0:
-		fmt.Println("apt-pac")
+		fmt.Println("konv")
 		return
 	default:
 		if osArgs[0] == "y" {
