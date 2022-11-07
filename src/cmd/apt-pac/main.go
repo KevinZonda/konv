@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	_, to, dec, err := loader.Load("/etc/apt-pac/rule.csv")
+	_, to, dec, err := loader.Load("/etc/apt-pac/rules.csv")
 	utils.PanicIfNotNil(err, "load conv law failed!")
 
 	osArgs := os.Args[1:]

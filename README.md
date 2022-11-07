@@ -1,21 +1,21 @@
-# apt-pac
+# Kov
 
-An apt syntax-like wrapper for pacman
+A generalised wrapper.
 
 ## Conversion Rules
 
-See [conv.csv](https://github.com/KevinZonda/apt-pac/blob/master/conv.csv).
+See [rules](https://github.com/KevinZonda/Konv/blob/master/rules).
 
 The first line is the csv header but also is the command excutor.
 
 We use following syntax to present matching way:
 
-| Symbol | Meaning | Syntax |
-| :-- | :-- | :-- |
-| `,` | delimiter | `apt,pacman` |
-| `;` | command separator | `-Syu;-S` |
-| `$` | match 1 word | `upgrade $` |
-| `$$` | match many words, i.e. `[word]` | `update $$` |
+| Symbol | Meaning                         | Syntax       |
+|:-------|:--------------------------------|:-------------|
+| `,`    | delimiter                       | `apt,pacman` |
+| `;`    | command separator               | `-Syu;-S`    |
+| `$`    | match 1 word                    | `upgrade $`  |
+| `$$`   | match many words, i.e. `[word]` | `update $$`  |
 
 ## Some Tool
 

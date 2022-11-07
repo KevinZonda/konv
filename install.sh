@@ -8,7 +8,7 @@
 mkdir /etc/apt-pac
 chmod +r /etc/apt-pac
 
-# copy rule file
+# copy rules file
 cp ./conv.csv /etc/apt-pac/rule.csv
 
 # compile apt-pac
