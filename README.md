@@ -16,6 +16,15 @@ We use following syntax to present matching way:
 | `;`    | command separator               | `-Syu;-S`    |
 | `$`    | match 1 word                    | `upgrade $`  |
 | `$$`   | match many words, i.e. `[word]` | `update $$`  |
+| `@`    | do not append target            | `@ls -al`    |
+
+TODO:
+
+| Symbol  | Meaning            |
+|:--------|:-------------------|
+| `...`   | match to end       |
+| `$var$` | match var          |
+| `\$`    | keep original word |
 
 ## Some Tool
 
