@@ -5,9 +5,9 @@ import (
 	"github.com/KevinZonda/apt-pac/pkg/console"
 	"github.com/KevinZonda/apt-pac/pkg/loader"
 	"github.com/KevinZonda/apt-pac/pkg/param"
+	"github.com/KevinZonda/apt-pac/pkg/process"
 	"github.com/KevinZonda/apt-pac/pkg/utils"
 	"os"
-	"os/exec"
 )
 
 func main() {
@@ -39,11 +39,12 @@ func main() {
 		panic("Parse failed. Please confirm that your command is correct!")
 	}
 	argses := loader.PatternToArgs(pattern, vars)
+	runs := parseArgs(to, argses)
 
 	if !cfg.SkipConfirm {
 		fmt.Println("Please ensure following commands are correct!")
-		for i, arg := range argses {
-			fmt.Printf("%d: %s %+v\n", i, to, arg)
+		for i, r := range runs {
+			fmt.Printf("%d: %s %+v\n", i, r.Name, r.Args)
 		}
 		fmt.Print("Continue [y/n]?")
 		isOk := console.ReadYes()
@@ -53,14 +54,5 @@ func main() {
 		}
 	}
 
-	for _, arg := range argses {
-		cmd := exec.Command(to, arg...)
-
-		cmd.Stderr = os.Stderr
-		cmd.Stdout = os.Stdout
-		cmd.Stdin = os.Stdin
-
-		_ = cmd.Start()
-		_ = cmd.Wait()
-	}
+	process.Runs(runs)
 }
