@@ -1,4 +1,4 @@
-# Kov
+# Konv
 
 A generalised wrapper.
 
