@@ -55,6 +55,8 @@ func Parse(s string) Mod {
 func CleanArg(s string) string {
 	ss := strings.Split(s, "/")
 	s = ss[len(ss)-1]
+	ss = strings.Split(s, "\\")
+	s = ss[len(ss)-1]
 	sb := strings.Builder{}
 	for _, c := range s {
 		if !utils.IsLetter(c) {
