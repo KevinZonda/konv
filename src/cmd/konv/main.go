@@ -55,6 +55,12 @@ func main() {
 		}
 	}
 
+	if cfg.ShowCmdList && cfg.SkipConfirm {
+		for i, r := range runs {
+			fmt.Printf("%d: %s %+v\n", i, r.Name, r.Args)
+		}
+	}
+
 	process.Runs(runs, func(r process.Runable, err error) bool {
 		fmt.Printf(
 			"run failed:\n"+

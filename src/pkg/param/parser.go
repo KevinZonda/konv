@@ -10,12 +10,14 @@ import (
 type Mod struct {
 	Ok          bool
 	SkipConfirm bool
+	ShowCmdList bool
 }
 
 func dft() Mod {
 	return Mod{
 		Ok:          false,
 		SkipConfirm: false,
+		ShowCmdList: false,
 	}
 }
 
@@ -46,6 +48,9 @@ func Parse(s string) Mod {
 			break
 		case "c":
 			m.SkipConfirm = false
+			break
+		case "l":
+			m.ShowCmdList = true
 			break
 		}
 	}

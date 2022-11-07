@@ -46,3 +46,4 @@ In most case, konv parameter can be ignored
 |:--------------|:---------------|
 | `:y` or `:sc` | ignore confirm |
 | `:c`          | show confirm   |
+| `:l`          | show run list  |
