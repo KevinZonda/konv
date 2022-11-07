@@ -1,6 +1,8 @@
 package process
 
 import (
+	"fmt"
+	"github.com/KevinZonda/konv/pkg/utils"
 	"os"
 	"os/exec"
 )
@@ -21,7 +23,12 @@ func RunAndWait(name string, args ...string) {
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
 
-	_ = cmd.Start()
+	err := cmd.Start()
+	utils.PanicIfNotNil(err,
+		fmt.Sprintf(
+			"run failed:\n"+
+				"cmd: %s %+v\n"+
+				"err: %+v\n", name, args, err))
 	_ = cmd.Wait()
 }
 
