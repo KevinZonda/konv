@@ -1,0 +1,6 @@
+k,ls
+port $      , @lsof -i :$
+untar $$    , @tar -xvf $$
+untargz $$  , @tar -xzvf $$
+untarbz2 $$ , @tar -xjvf $$
+targz $$    , @tar -xf $$
