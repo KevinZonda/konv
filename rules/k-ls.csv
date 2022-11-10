@@ -24,13 +24,26 @@ start $$    , @systemctl start $$
 stop  $$    , @systemctl stop $$
 enable $$   , @systemctl enable $$
 disable $$  , @systemctl disable $$
+reload $$   , @systemctl reload $$
+restart $$  , @systemctl restart $$
+
 sys start $$, @systemctl start $$
 sys stop $$ , @systemctl stop $$
 sys en $$   , @systemctl enable $$
 sys dis $$  , @systemctl disable $$
+sys res $$  , @systemctl restart $$
+sys $$      , @systemctl $$
 
 ## Go
 go p        , @go build -ldflags "-s -w"
 
 ## Ssh
 new ecc $   , @ssh-keygen -t ed25519 -C $
+
+## Ps
+ps          , @ps aux
+ps $        , @ps aux | grep $
+
+## Dns
+flush dns   , @resolvectl flush-caches
+dns flush   , @resolvectl flush-caches
