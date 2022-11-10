@@ -1,13 +1,13 @@
 apt,pacman
-install $$,-S $$
-remove $,-Rs $
-autoremove $,-R $
-upgrade,-Syu
-upgrade $$,-Syu;-S $$
-search $$,-Ss $$
-list,-Q
-clean,-Sc
-show,-Qi
-autoremove,-Qdtq | pacman -Rs -
-update,-Syy
-help,-h
+install $$   , -S $$
+remove $     , -Rs $
+autoremove $ , -R $
+upgrade      , -Syu
+upgrade $$   , -Syu;-S $$
+search $$    , -Ss $$
+list         , -Q
+clean        , -Sc
+show         , -Qi
+autoremove   , -Qdtq | pacman -Rs -
+update       , -Syy
+help         , -h
