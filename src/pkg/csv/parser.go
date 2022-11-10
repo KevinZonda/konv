@@ -16,6 +16,9 @@ func ParseLines(lines []string, sep string) map[string]string {
 		if line == "" {
 			continue
 		}
+		if strings.HasPrefix(trimed, "#") {
+			continue
+		}
 		kvp := strings.Split(trimed, sep)
 		if len(kvp) != 2 {
 			continue
