@@ -13,7 +13,24 @@ targz $$    , @tar -xf $$
 
 ## Ultil
 nf          , @neofetch
+rand        , @echo $RANDOM
 
 ## Show
 show de     , @echo $XDG_SESSION_TYPE
 show port $ , @lsof -i :$
+
+## Systemctl
+start $$    , @systemctl start $$
+stop  $$    , @systemctl stop $$
+enable $$   , @systemctl enable $$
+disable $$  , @systemctl disable $$
+sys start $$, @systemctl start $$
+sys stop $$ , @systemctl stop $$
+sys en $$   , @systemctl enable $$
+sys dis $$  , @systemctl disable $$
+
+## Go
+go p        , @go build -ldflags "-s -w"
+
+## Ssh
+new ecc $   , @ssh-keygen -t ed25519 -C $
