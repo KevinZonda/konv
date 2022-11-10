@@ -1,6 +1,19 @@
 k,ls
 port $      , @lsof -i :$
+
+## Archive
 untar $$    , @tar -xvf $$
 untargz $$  , @tar -xzvf $$
 untarbz2 $$ , @tar -xjvf $$
 targz $$    , @tar -xf $$
+
+## chmod
++$ $$       , @chmod +$ $$
+-$          , @chmod -$ $$
+
+## Ultil
+nf          , @neofetch
+
+## Show
+show de     , @echo $XDG_SESSION_TYPE
+show port $ , @lsof -i :$
