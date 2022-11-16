@@ -42,7 +42,7 @@ func Parse(s string) Mod {
 	return m
 }
 
-func CleanArg(s string) string {
+func GetSourceFromArg0(s string) string {
 	ss := strings.Split(s, "/")
 	s = ss[len(ss)-1]
 	ss = strings.Split(s, "\\")
