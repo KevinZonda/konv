@@ -8,12 +8,11 @@ import (
 
 type Mod struct {
 	Param string
+	Env   []string
 }
 
 func ParseLines(lines []string) Mod {
-	m := Mod{
-		Param: "",
-	}
+	m := dft()
 	if lines == nil || len(lines) < 1 {
 		return m
 	}
@@ -23,19 +22,31 @@ func ParseLines(lines []string) Mod {
 		if len(kvp) != 2 {
 			continue
 		}
-		if utils.Trim(kvp[0]) == "param" {
-			m.Param = utils.Trim(kvp[1])
-			continue
+		key := utils.Trim(kvp[0])
+		value := utils.Trim(kvp[1])
+		switch key {
+		case "param":
+			m.Param = value
+			break
+		case "env":
+			m.Env = append(m.Env, key)
+			break
 		}
 	}
 	return m
 }
 
-func GetConfig(path string) (isOk bool, result Mod) {
+func dft() Mod {
+	return Mod{
+		Param: "",
+		Env:   nil,
+	}
+}
+
+func GetConfig(path string) (result Mod) {
 	s, err := io.ReadAllLines(path)
 	if err != nil {
-		isOk = false
-		return
+		return dft()
 	}
-	return true, ParseLines(s)
+	return ParseLines(s)
 }

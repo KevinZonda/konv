@@ -33,13 +33,12 @@ func main() {
 	}
 
 	runCfg := param.Parse(args[0])
+	ruleCfg := cfg.GetConfig(path.GetConvCfgPath(source, isSelf))
+
 	if runCfg.Ok {
 		args = args[1:]
 	} else {
-		isOk, rCfg := cfg.GetConfig(path.GetConvCfgPath(source, isSelf))
-		if isOk {
-			runCfg = param.Parse(rCfg.Param)
-		}
+		runCfg = param.Parse(ruleCfg.Param)
 	}
 
 	pattern, vars, ok := loader.Conv(dec, utils.TrimAll(args))
@@ -47,6 +46,6 @@ func main() {
 		panic("Parse failed. Please confirm that your command is correct!")
 	}
 	argses := loader.PatternToArgs(pattern, vars)
-	runs := parseArgs(to, argses)
+	runs := mapToRunnableList(to, argses, ruleCfg.Env)
 	run(runCfg, runs)
 }

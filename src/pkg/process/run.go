@@ -8,15 +8,14 @@ import (
 type Runable struct {
 	Name string
 	Args []string
+	Env  []string
 }
 
 func (r Runable) run() error {
-	return RunAndWait(r.Name, r.Args...)
-}
+	cmd := exec.Command(r.Name, r.Args...)
 
-func RunAndWait(name string, args ...string) error {
-	cmd := exec.Command(name, args...)
-
+	cmd.Env = r.Env
+	
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
@@ -27,7 +26,6 @@ func RunAndWait(name string, args ...string) error {
 	}
 	return cmd.Wait()
 }
-
 func Runs(rs []Runable, ifErr func(Runable, error) bool) {
 	for _, r := range rs {
 		err := r.run()
