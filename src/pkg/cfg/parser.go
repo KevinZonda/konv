@@ -16,12 +16,9 @@ func ParseLines(lines []string) Mod {
 	if lines == nil || len(lines) < 1 {
 		return m
 	}
+	lines = utils.TrimAll(lines)
 	for _, line := range lines {
-		trimed := utils.Trim(line)
-		if line == "" {
-			continue
-		}
-		kvp := strings.SplitN(trimed, "=", 2)
+		kvp := strings.SplitN(line, "=", 2)
 		if len(kvp) != 2 {
 			continue
 		}
