@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	ruleCfg "github.com/KevinZonda/konv/pkg/cfg"
 	"github.com/KevinZonda/konv/pkg/console"
 	"github.com/KevinZonda/konv/pkg/loader"
 	"github.com/KevinZonda/konv/pkg/param"
@@ -38,7 +39,10 @@ func main() {
 	if cfg.Ok {
 		osArgs = osArgs[1:]
 	} else {
-		_, cfg = param.ParseFromFile(path.GetConvCfgPath(arg1, isSelf))
+		isOk, rCfg := ruleCfg.GetConfig(path.GetConvCfgPath(arg1, isSelf))
+		if isOk {
+			cfg = param.Parse(rCfg.Param)
+		}
 	}
 
 	pattern, vars, ok := loader.Conv(dec, utils.TrimAll(osArgs))

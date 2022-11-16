@@ -1,6 +1,7 @@
 package cfg
 
 import (
+	"github.com/KevinZonda/konv/pkg/io"
 	"github.com/KevinZonda/konv/pkg/utils"
 	"strings"
 )
@@ -28,4 +29,13 @@ func ParseLines(lines []string) Mod {
 		}
 	}
 	return m
+}
+
+func GetConfig(path string) (isOk bool, result Mod) {
+	s, err := io.ReadAllLines(path)
+	if err != nil {
+		isOk = false
+		return
+	}
+	return true, ParseLines(s)
 }
