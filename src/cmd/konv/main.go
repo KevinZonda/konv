@@ -17,7 +17,13 @@ func main() {
 		panic("Cannot found target rule")
 	}
 
-	_, to, dec, err := loader.Load(path.GetConvPath(arg1, false))
+	isSelf := true
+
+	_, to, dec, err := loader.Load(path.GetConvPath(arg1, isSelf))
+	if err != nil {
+		isSelf = false
+		_, to, dec, err = loader.Load(path.GetConvPath(arg1, isSelf))
+	}
 	utils.PanicIfNotNil(err, "load conv law failed!")
 
 	osArgs := os.Args[1:]
@@ -32,7 +38,7 @@ func main() {
 	if cfg.Ok {
 		osArgs = osArgs[1:]
 	} else {
-		_, cfg = param.ParseFromFile(path.GetConvCfgPath(arg1, false))
+		_, cfg = param.ParseFromFile(path.GetConvCfgPath(arg1, isSelf))
 	}
 
 	pattern, vars, ok := loader.Conv(dec, utils.TrimAll(osArgs))

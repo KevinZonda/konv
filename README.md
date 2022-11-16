@@ -47,3 +47,11 @@ In most case, konv parameter can be ignored
 | `:y` or `:sc` | ignore confirm |
 | `:c`          | show confirm   |
 | `:l`          | show run list  |
+
+## Paths
+
+Usually, you should put your `cfg`s & `csv`s to
+
+- `$HOME/.config`
+- `/etc/konv` (for *nix & macOS)
+- `%AppData%` (for Windows)
