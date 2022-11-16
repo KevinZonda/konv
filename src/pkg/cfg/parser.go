@@ -5,10 +5,16 @@ import (
 	"strings"
 )
 
-func ParseLines(lines []string) map[string]string {
-	pairs := make(map[string]string)
+type Mod struct {
+	Param string
+}
+
+func ParseLines(lines []string) Mod {
+	m := Mod{
+		Param: "",
+	}
 	if lines == nil || len(lines) < 1 {
-		return pairs
+		return m
 	}
 	for _, line := range lines {
 		trimed := utils.Trim(line)
@@ -19,7 +25,10 @@ func ParseLines(lines []string) map[string]string {
 		if len(kvp) != 2 {
 			continue
 		}
-		pairs[utils.Trim(kvp[0])] = utils.Trim(kvp[1])
+		if utils.Trim(kvp[0]) == "param" {
+			m.Param = utils.Trim(kvp[1])
+			continue
+		}
 	}
-	return pairs
+	return m
 }

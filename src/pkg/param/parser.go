@@ -28,11 +28,7 @@ func ParseFromFile(path string) (isOk bool, mod Mod) {
 		return false, mod
 	}
 	m := cfg.ParseLines(s)
-	param, ok := m["param"]
-	if !ok {
-		return false, mod
-	}
-	return true, Parse(param)
+	return true, Parse(m.Param)
 }
 
 func Parse(s string) Mod {
