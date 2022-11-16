@@ -8,6 +8,25 @@ import (
 
 func Conv(r *decision.CheckTree, args []string) (pattern string, vars []string, ok bool) {
 	curr := r
+	if len(args) == 0 {
+		if curr.Data != nil {
+			ok = true
+			pattern = *curr.Data
+			return
+		}
+		gen := false
+		curr, gen = curr.Next("")
+		if gen {
+			ok = false
+			return
+		}
+		if curr.Data != nil {
+			ok = true
+			pattern = *curr.Data
+			return
+		}
+	}
+
 	isV := false
 	for _, arg := range args {
 		if curr == nil {

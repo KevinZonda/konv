@@ -26,12 +26,6 @@ func main() {
 
 	args := os.Args[1:]
 
-	if len(args) == 0 {
-		fmt.Print(source)
-		fmt.Println(" - powered by konv")
-		return
-	}
-
 	runCfg := param.Parse(args[0])
 	ruleCfg := cfg.GetConfig(path.GetConvCfgPath(source, isSelf))
 
@@ -46,6 +40,11 @@ func main() {
 		panic("Parse failed. Please confirm that your command is correct!")
 	}
 	argses := loader.PatternToArgs(pattern, vars)
+	if len(argses) == 0 {
+		fmt.Printf("%s - powered by konv\n", source)
+		fmt.Println("-- Empty action list. No oper has been done!")
+		return
+	}
 	runs := mapToRunnableList(to, argses, ruleCfg.Env)
 	run(runCfg, runs)
 }
