@@ -14,10 +14,27 @@ func getBase() string {
 	return "/etc/konv"
 }
 
-func GetConversionPath(target string) string {
-	return path.Join(getBase(), target+".csv")
+func getSelfBase() string {
+	dir, _ := os.UserHomeDir()
+	return path.Join(dir, ".config", "konv")
 }
 
-func GetConversionCfgPath(target string) string {
-	return path.Join(getBase(), target+".cfg")
+func GetConvPath(target string, isSelf bool) string {
+	var base string
+	if isSelf {
+		base = getSelfBase()
+	} else {
+		base = getBase()
+	}
+	return path.Join(base, target+".csv")
+}
+
+func GetConvCfgPath(target string, isSelf bool) string {
+	var base string
+	if isSelf {
+		base = getSelfBase()
+	} else {
+		base = getBase()
+	}
+	return path.Join(base, target+".cfg")
 }

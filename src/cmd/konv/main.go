@@ -12,12 +12,12 @@ import (
 )
 
 func main() {
-	arg1 := utils.Trim(param.CleanArg((os.Args[0])))
+	arg1 := utils.Trim(param.CleanArg(os.Args[0]))
 	if arg1 == "" {
 		panic("Cannot found target rule")
 	}
 
-	_, to, dec, err := loader.Load(path.GetConversionPath(arg1))
+	_, to, dec, err := loader.Load(path.GetConvPath(arg1, false))
 	utils.PanicIfNotNil(err, "load conv law failed!")
 
 	osArgs := os.Args[1:]
@@ -32,7 +32,7 @@ func main() {
 	if cfg.Ok {
 		osArgs = osArgs[1:]
 	} else {
-		_, cfg = param.ParseFromFile(path.GetConversionCfgPath(arg1))
+		_, cfg = param.ParseFromFile(path.GetConvCfgPath(arg1, false))
 	}
 
 	pattern, vars, ok := loader.Conv(dec, utils.TrimAll(osArgs))
