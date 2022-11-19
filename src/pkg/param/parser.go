@@ -41,6 +41,7 @@ func Parse(s string) Mod {
 		case "v":
 			m.Verbose = true
 			verbose.VerboseMode = true
+			verbose.PrintQueue()
 		}
 	}
 	m.Ok = true

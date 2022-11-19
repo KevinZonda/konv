@@ -7,7 +7,12 @@ var VerboseMode bool = false
 var _queue []string
 
 func fmtLog(format string, args ...any) string {
-	s := fmt.Sprintf(format, args...)
+	var s string
+	if len(args) == 0 {
+		s = format
+	} else {
+		s = fmt.Sprintf(format, args...)
+	}
 	return "[VERBOSE] " + s
 }
 
