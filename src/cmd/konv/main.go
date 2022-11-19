@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/KevinZonda/konv/pkg/cfg"
 	"github.com/KevinZonda/konv/pkg/loader"
 	"github.com/KevinZonda/konv/pkg/param"
@@ -48,14 +47,18 @@ func main() {
 		runCfg = param.Parse(ruleCfg.Param)
 	}
 
-	pattern, vars, ok := loader.GetDecisionResult(dec, utils.TrimAll(args))
+	pattern, vars, ok := loader.GetDecisionResult(dec, args)
+
 	if !ok {
+		if len(args) == 0 {
+			logo(source)
+			return
+		}
 		panic("Parse failed. Please confirm that your command is correct!")
 	}
 	cmdsArgs := loader.CombineToCommandArgs(pattern, vars)
 	if len(cmdsArgs) == 0 {
-		fmt.Printf("%s - powered by konv\n", source)
-		fmt.Println("-- Empty action list. No oper has been done!")
+		logo(source)
 		return
 	}
 	runs := mapToRunnableList(to, cmdsArgs, ruleCfg.Env)
