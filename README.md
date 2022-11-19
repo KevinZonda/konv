@@ -17,14 +17,15 @@ We use following syntax to present matching way:
 | `$`    | match 1 word                    | `upgrade $`  |
 | `$$`   | match many words, i.e. `[word]` | `update $$`  |
 | `@`    | do not append target            | `@ls -al`    |
+| `@xxx` | `xxx` without any parse         | `@$` -> `$`  |
 
-TODO:
 
-| Symbol  | Meaning            |
-|:--------|:-------------------|
-| `...`   | match to end       |
-| `$var$` | match var          |
-| `\$`    | keep original word |
+TODO
+
+| Symbol  | Meaning             |
+|:--------|:--------------------|
+| `...`   | match to end        |
+| `$var$` | match var           |
 
 ## Konv Parameter
 
@@ -47,6 +48,7 @@ In most case, konv parameter can be ignored
 | `:y` or `:sc` | ignore confirm |
 | `:c`          | show confirm   |
 | `:l`          | show run list  |
+| `:v`          | verbose        |
 
 ## Paths
 
