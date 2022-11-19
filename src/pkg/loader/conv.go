@@ -62,7 +62,7 @@ func CombineToCommandArgs(pattern string, vars []string) [][]string {
 				finalArgs = append(finalArgs, vars...)
 				continue
 			}
-			if strings.HasPrefix(arg, "\\") {
+			if strings.HasPrefix(arg, "@") {
 				arg = arg[1:]
 			}
 			finalArgs = append(finalArgs, arg)
