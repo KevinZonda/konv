@@ -6,24 +6,19 @@ import (
 	"strings"
 )
 
-func Conv(r *decision.CheckTree, args []string) (pattern string, vars []string, ok bool) {
+func GetDecisionResult(r *decision.CheckTree, args []string) (pattern string, vars []string, ok bool) {
 	curr := r
 	if len(args) == 0 {
 		if curr.Data != nil {
-			ok = true
-			pattern = *curr.Data
-			return
+			return *curr.Data, nil, true
 		}
-		gen := false
-		curr, gen = curr.Next("")
-		if gen {
-			ok = false
-			return
+		isWildcard := false
+		curr, isWildcard = curr.Next("")
+		if isWildcard {
+			return "", nil, false
 		}
 		if curr.Data != nil {
-			ok = true
-			pattern = *curr.Data
-			return
+			return *curr.Data, nil, true
 		}
 	}
 
@@ -48,28 +43,26 @@ func Conv(r *decision.CheckTree, args []string) (pattern string, vars []string, 
 	return
 }
 
-func PatternToArgs(pattern string, vars []string) [][]string {
+func CombineToCommandArgs(pattern string, vars []string) [][]string {
 	cmds := utils.TrimAll(strings.Split(pattern, ";"))
 	var rst [][]string
 	for _, cmd := range cmds {
 		finalArgs := []string{}
 		args := utils.TrimAll(strings.Split(cmd, " "))
 		for _, arg := range args {
-			switch arg {
-			case "$":
+			if arg == "$" {
 				if len(vars) == 0 {
 					panic("wrong len")
 				}
 				finalArgs = append(finalArgs, vars[0])
 				vars = vars[1:]
-				break
-			case "$$":
-				finalArgs = append(finalArgs, vars...)
-				break
-			default:
-				finalArgs = append(finalArgs, arg)
-				break
+				continue
 			}
+			if arg == "$$" {
+				finalArgs = append(finalArgs, vars...)
+				continue
+			}
+			finalArgs = append(finalArgs, arg)
 		}
 		rst = append(rst, finalArgs)
 	}

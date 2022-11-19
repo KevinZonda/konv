@@ -40,16 +40,16 @@ func main() {
 		runCfg = param.Parse(ruleCfg.Param)
 	}
 
-	pattern, vars, ok := loader.Conv(dec, utils.TrimAll(args))
+	pattern, vars, ok := loader.GetDecisionResult(dec, utils.TrimAll(args))
 	if !ok {
 		panic("Parse failed. Please confirm that your command is correct!")
 	}
-	argses := loader.PatternToArgs(pattern, vars)
-	if len(argses) == 0 {
+	cmdsArgs := loader.CombineToCommandArgs(pattern, vars)
+	if len(cmdsArgs) == 0 {
 		fmt.Printf("%s - powered by konv\n", source)
 		fmt.Println("-- Empty action list. No oper has been done!")
 		return
 	}
-	runs := mapToRunnableList(to, argses, ruleCfg.Env)
+	runs := mapToRunnableList(to, cmdsArgs, ruleCfg.Env)
 	run(runCfg, runs)
 }
