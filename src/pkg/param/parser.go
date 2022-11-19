@@ -2,6 +2,7 @@ package param
 
 import (
 	"github.com/KevinZonda/konv/pkg/utils"
+	"github.com/KevinZonda/konv/pkg/verbose"
 	"strings"
 )
 
@@ -9,6 +10,7 @@ type Mod struct {
 	Ok          bool
 	SkipConfirm bool
 	ShowCmdList bool
+	Verbose     bool
 }
 
 func dft() Mod {
@@ -36,6 +38,9 @@ func Parse(s string) Mod {
 		case "l":
 			m.ShowCmdList = true
 			break
+		case "v":
+			m.Verbose = true
+			verbose.VerboseMode = true
 		}
 	}
 	m.Ok = true

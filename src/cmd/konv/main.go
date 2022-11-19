@@ -7,6 +7,7 @@ import (
 	"github.com/KevinZonda/konv/pkg/param"
 	"github.com/KevinZonda/konv/pkg/path"
 	"github.com/KevinZonda/konv/pkg/utils"
+	"github.com/KevinZonda/konv/pkg/verbose"
 	"os"
 )
 
@@ -17,10 +18,14 @@ func main() {
 	}
 
 	isSelf := true
-	_, to, dec, err := loader.Load(path.GetConvPath(source, true))
+	convPath := path.GetConvPath(source, true)
+	verbose.PrintF("load conv %s", convPath)
+	_, to, dec, err := loader.Load(convPath)
 	if err != nil {
 		isSelf = false
-		_, to, dec, err = loader.Load(path.GetConvPath(source, isSelf))
+		convPath = path.GetConvPath(source, isSelf)
+		verbose.PrintF("load failed, try %s", convPath)
+		_, to, dec, err = loader.Load(convPath)
 	}
 	utils.PanicIfNotNil(err, "load conv law failed!")
 
@@ -30,13 +35,16 @@ func main() {
 	runCfg := param.Mod{
 		Ok: false,
 	}
+
 	if len(args) > 0 {
+		verbose.PrintF("try parse arg[1] to get cfg")
 		runCfg = param.Parse(args[0])
 		if runCfg.Ok {
 			args = args[1:]
 		}
 	}
 	if !runCfg.Ok {
+		verbose.PrintF("try parse rule config to get run cfg")
 		runCfg = param.Parse(ruleCfg.Param)
 	}
 
