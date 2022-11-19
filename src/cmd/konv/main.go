@@ -26,12 +26,17 @@ func main() {
 
 	args := os.Args[1:]
 
-	runCfg := param.Parse(args[0])
 	ruleCfg := cfg.GetConfig(path.GetConvCfgPath(source, isSelf))
-
-	if runCfg.Ok {
-		args = args[1:]
-	} else {
+	runCfg := param.Mod{
+		Ok: false,
+	}
+	if len(args) > 0 {
+		runCfg = param.Parse(args[0])
+		if runCfg.Ok {
+			args = args[1:]
+		}
+	}
+	if !runCfg.Ok {
 		runCfg = param.Parse(ruleCfg.Param)
 	}
 
