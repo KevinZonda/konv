@@ -1,0 +1,2 @@
+keygen, ssh-keygen
+ecc $$, ssh-keygen -t ed25519 -C $$
