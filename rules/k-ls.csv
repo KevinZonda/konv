@@ -35,7 +35,12 @@ sys res $$  , @systemctl restart $$
 sys $$      , @systemctl $$
 
 ## Go
-go p        , @go build -ldflags "-s -w"
+go restore  , @go mod download
+go r        , @go mod download
+go b $$     , @go build $$
+go p $$     , @go build -ldflags "-s -w" $$
+go pub $$   , @go build -ldflags "-s -w" $$
+go publish $$ , @go build -ldflags "-s -w" $$
 
 ## Ssh
 new ecc $   , @ssh-keygen -t ed25519 -C $
