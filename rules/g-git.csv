@@ -1,13 +1,36 @@
 g,git
-p      , push
+
 cm $   , commit -m $
 c $$   , commit $$
 cl $$  , clone $$
+cp $$  , cherry-pick $$
+
+# reset
 r $$   , reset $$
 hr $$  , reset --hard $$
+sr $$  , reset --soft $$
+rh $$  , reset --hard $$
+rs $$  , reset --soft $$
+
+# push
+p $$   , push $$
+fp     , push --force
+pf     , push --force
+
 co $$  , checkout $$
 pl     , pull
 a $$   , add $$
 aa     , add .
 acp $$ , add .;commit -m $$;push
-fp     , push --force
+
+# submodule
+sub add $$ , submodule add $$
+sub upd $$ , submodule update $$
+sub restore, submodule update --init --recursive
+
+# ohshitgit
+ref    , reflog
+rest to $     ,  reset HEAD@{$}
+fix commit msg, commit --amend
+fix commit    , commit --amend --no-edit
+fix branch $  , reset HEAD~ --soft; stash; checkout $; stash pop; add .
