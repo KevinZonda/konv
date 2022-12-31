@@ -19,12 +19,12 @@ func main() {
 	isSelf := true
 	convPath := path.GetConvPath(source, true)
 	verbose.PrintF("load conv %s", convPath)
-	_, to, dec, err := loader.Load(convPath)
+	_, to, dec, err := loader.LoadConvRule(convPath)
 	if err != nil {
 		isSelf = false
 		convPath = path.GetConvPath(source, isSelf)
 		verbose.PrintF("load failed, try %s", convPath)
-		_, to, dec, err = loader.Load(convPath)
+		_, to, dec, err = loader.LoadConvRule(convPath)
 	}
 	utils.PanicIfNotNil(err, "load conv law failed!")
 

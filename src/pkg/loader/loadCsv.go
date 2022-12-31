@@ -44,7 +44,7 @@ func parseCsvContentToTree(head string, result map[string]string) *decision.Chec
 	return f
 }
 
-func Load(path string) (from, to string, dec *decision.CheckTree, err error) {
+func LoadConvRule(path string) (from, to string, dec *decision.CheckTree, err error) {
 	var content map[string]string
 	from, to, content, err = loadFromToCsv(path)
 	if err != nil {
