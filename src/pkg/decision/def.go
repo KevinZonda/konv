@@ -60,30 +60,6 @@ func (t *CheckTree) AddToSub(keys []string, data string) {
 	curr.Data = &data
 }
 
-func (t *CheckTree) Get(keys []string) *CheckTree {
-	return t.get(keys, true)
-}
-
-func (t *CheckTree) get(keys []string, isfirst bool) *CheckTree {
-	if t == nil {
-		return nil
-	}
-	if len(keys) == 0 {
-		return t
-	}
-	if isfirst {
-		if t.Key != keys[0] {
-			return nil
-		}
-		keys = keys[1:]
-	}
-	child, ok := t.Children[keys[0]]
-	if !ok {
-		return nil
-	}
-	return child.get(keys[1:], false)
-}
-
 func (r *CheckTree) GetNode(key string) *CheckTree {
 	if r == nil {
 		return nil

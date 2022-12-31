@@ -10,7 +10,7 @@ import (
 	"github.com/KevinZonda/konv/pkg/utils"
 )
 
-func loadFromToStyleCsv(path string) (from, to string, result map[string]string, err error) {
+func loadFromToCsv(path string) (from, to string, result map[string]string, err error) {
 	var lines []string
 	lines, err = io.ReadAllLines(path)
 	if err != nil {
@@ -30,6 +30,7 @@ func loadFromToStyleCsv(path string) (from, to string, result map[string]string,
 	from, to = headers[0], headers[1]
 
 	result = csv.ParseLines(lines[1:], ",")
+    
 	return
 }
 
@@ -45,7 +46,7 @@ func parseCsvContentToTree(head string, result map[string]string) *decision.Chec
 
 func Load(path string) (from, to string, dec *decision.CheckTree, err error) {
 	var content map[string]string
-	from, to, content, err = loadFromToStyleCsv(path)
+	from, to, content, err = loadFromToCsv(path)
 	if err != nil {
 		return
 	}
