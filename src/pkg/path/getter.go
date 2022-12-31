@@ -6,7 +6,11 @@ import (
 	"runtime"
 )
 
-func getBase() string {
+// base get base path
+// Windows: %AppData%\konv
+// Linux: /etc/konv
+// MacOS: /etc/konv
+func base() string {
 	if runtime.GOOS == "windows" {
 		dir, _ := os.UserConfigDir()
 		return path.Join(dir, "konv")
@@ -14,27 +18,31 @@ func getBase() string {
 	return "/etc/konv"
 }
 
-func getSelfBase() string {
+// selfBase get self base path
+// Windows: %USERPROFILE%\.config\konv
+// Linux: ~/.config/konv
+// MacOS: ~/.config/konv
+func selfBase() string {
 	dir, _ := os.UserHomeDir()
 	return path.Join(dir, ".config", "konv")
 }
 
-func GetConvPath(target string, isSelf bool) string {
-	var base string
+func getPath(target, ext string, isSelf bool) string {
+	var b string
 	if isSelf {
-		base = getSelfBase()
+		b = selfBase()
 	} else {
-		base = getBase()
+		b = base()
 	}
-	return path.Join(base, target+".csv")
+	return path.Join(b, target+"."+ext)
 }
 
+// GetConvPath Get Conv Rule Path
+func GetConvPath(target string, isSelf bool) string {
+	return getPath(target, "csv", isSelf)
+}
+
+// GetConvCfgPath Get Conv Cfg Path
 func GetConvCfgPath(target string, isSelf bool) string {
-	var base string
-	if isSelf {
-		base = getSelfBase()
-	} else {
-		base = getBase()
-	}
-	return path.Join(base, target+".cfg")
+	return getPath(target, "cfg", isSelf)
 }

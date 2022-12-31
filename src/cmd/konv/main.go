@@ -9,7 +9,9 @@ import (
 	"github.com/KevinZonda/konv/pkg/verbose"
 	"os"
 )
+func loadConvRule(source string) {
 
+}
 func main() {
 	source := utils.Trim(param.GetSourceFromArg0(os.Args[0]))
 	if source == "" {
