@@ -1,32 +1,45 @@
 package main
 
 import (
+	"os"
+
 	"github.com/KevinZonda/konv/pkg/cfg"
+	"github.com/KevinZonda/konv/pkg/decision"
 	"github.com/KevinZonda/konv/pkg/loader"
 	"github.com/KevinZonda/konv/pkg/param"
 	"github.com/KevinZonda/konv/pkg/path"
 	"github.com/KevinZonda/konv/pkg/utils"
 	"github.com/KevinZonda/konv/pkg/verbose"
-	"os"
 )
 
-func main() {
-	source := utils.Trim(param.GetSourceFromArg0(os.Args[0]))
-	if source == "" {
-		panic("Cannot found target rule")
-	}
-
-	isSelf := true
+func loadConvRule(source string) (to string, dec *decision.CheckTree, isSelf bool) {
 	convPath := path.GetConvPath(source, true)
 	verbose.PrintF("load conv %s", convPath)
 	_, to, dec, err := loader.LoadConvRule(convPath)
-	if err != nil {
-		isSelf = false
-		convPath = path.GetConvPath(source, isSelf)
-		verbose.PrintF("load failed, try %s", convPath)
-		_, to, dec, err = loader.LoadConvRule(convPath)
+	if err == nil {
+		return to, dec, true
 	}
-	utils.PanicIfNotNil(err, "load conv law failed!")
+	convPath = path.GetConvPath(source, false)
+	verbose.PrintF("load failed, try %s", convPath)
+	_, to, dec, err = loader.LoadConvRule(convPath)
+	if err != nil {
+		panic("load conv law failed!")
+	}
+	return to, dec, false
+}
+
+func main() {
+	source := utils.Trim(param.GetSourceFromArg0(os.Args[0]))
+
+	if source == "" {
+		panic("Cannot found target rule")
+	}
+	if source == "konv" {
+		logo(source)
+		return
+	}
+
+	to, dec, isSelf := loadConvRule(source)
 
 	args := os.Args[1:]
 
