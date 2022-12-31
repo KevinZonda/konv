@@ -10,30 +10,22 @@ type CheckTree struct {
 	Children map[string]*CheckTree
 }
 
-func (t *CheckTree) AddKey(key string) error {
-	return t.Add(&CheckTree{Key: key})
-}
-
-func (t *CheckTree) AddKeyAndValue(key, value string) error {
-	return t.Add(&CheckTree{Key: key, Data: &value})
-}
-
-func (t *CheckTree) Add(v *CheckTree) error {
-	if t == nil {
-		return errors.New("empty tree")
-	}
-	if t.Children == nil {
-		t.Children = make(map[string]*CheckTree)
-	}
-	t.Children[v.Key] = v
-	return nil
+func (t *CheckTree) addNode(key string, data *string) error {
+    if t == nil {
+        return errors.New("empty tree")
+    }
+    if t.Children == nil {
+        t.Children = make(map[string]*CheckTree)
+    }
+    t.Children[key] = &CheckTree{Key: key, Data: data}
+    return nil
 }
 
 func (t *CheckTree) AddToSub(keys []string, data string) {
 	if len(keys) == 1 {
 		n := t.GetNode(keys[0])
 		if n == nil {
-			_ = t.AddKeyAndValue(keys[0], data)
+			_ = t.addNode(keys[0], &data)
 			return
 		}
 		n.Data = &data
@@ -54,12 +46,14 @@ func (t *CheckTree) AddToSub(keys []string, data string) {
 	toAdd := keys[index:]
 	for _, key := range toAdd {
 		// fmt.Printf("ADD: %s -> %s\n", curr.Key, key)
-		_ = curr.AddKey(key)
+		_ = curr.addNode(key, nil)
 		curr = curr.GetNode(key)
 	}
 	curr.Data = &data
 }
 
+// GetNode get a child which has a specific key,
+// return nil if not exist
 func (r *CheckTree) GetNode(key string) *CheckTree {
 	if r == nil {
 		return nil
