@@ -34,3 +34,5 @@ rest to $     ,  reset HEAD@{$}
 fix commit msg, commit --amend
 fix commit    , commit --amend --no-edit
 fix branch $  , reset HEAD~ --soft; stash; checkout $; stash pop; add .
+
+$$, $$
